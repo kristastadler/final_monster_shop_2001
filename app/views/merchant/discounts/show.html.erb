@@ -1,4 +1,4 @@
-<h2><%= @discount.description %> <%= @discount.item.name %></h2>
+<h2><%= @discount.description %> <%= @discount.item.name.pluralize %></h2>
 
 <p>Discount Applies to: <%=link_to "#{@discount.item.name}", "/items/#{@discount.item.id}" %></p>
 <p>Regular Price: $<%= @discount.item.price %></p>
