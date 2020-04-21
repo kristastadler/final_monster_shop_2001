@@ -1,3 +1,5 @@
 <h2>Edit Discount</h2>
+
+<p><center> Please enter discount amounts as a decimal percentage (e.g. .25 for 25%, .50 for 50%, etc.) </center></p>
 <%= render partial: 'form', locals: {url: "/merchant/items/discounts/#{@discount.id}",
                                      method: :put} %>
