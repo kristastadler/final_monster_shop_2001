@@ -66,4 +66,40 @@ RSpec.describe "As a merchant employee" do
     expect(page).to have_content("Discount amount can't be blank")
 
   end
+
+  it "I cannot set a discount amount to 100 percent or more" do
+
+    visit "/merchant/items/discounts"
+
+    within "#item-#{@tire.id}" do
+      click_link "Add New Discount"
+    end
+
+    fill_in "Description", with: "75% off 6 or More"
+    fill_in "Discount amount", with: "2"
+    fill_in "Minimum quantity", with: "6"
+    click_button "Create Discount"
+
+    expect(page).to have_content("Discount amount must be less than 1")
+    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+
+  end
+
+  it "I cannot set a minimum quantity of less than 1" do
+
+    visit "/merchant/items/discounts"
+
+    within "#item-#{@tire.id}" do
+      click_link "Add New Discount"
+    end
+
+    fill_in "Description", with: "75% off 6 or More"
+    fill_in "Discount amount", with: ".75"
+    fill_in "Minimum quantity", with: "0"
+    click_button "Create Discount"
+
+    expect(page).to have_content("Minimum quantity must be greater than 0")
+    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+
+  end
 end
