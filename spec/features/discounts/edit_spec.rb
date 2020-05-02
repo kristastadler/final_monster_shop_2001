@@ -29,18 +29,18 @@ RSpec.describe "As a merchant employee" do
 
     it "I can update my discounts" do
 
-      visit "/merchant/items/discounts/#{@discount_1.id}"
+      visit "/merchant/discounts/#{@discount_1.id}"
 
       click_link "Update Discount"
 
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}/edit")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
 
       fill_in "Description", with: "75% off 6 or More"
       fill_in "Discount amount", with: "0.75"
       fill_in "Minimum quantity", with: "6"
       click_button "Update Discount"
 
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}")
 
       expect(page).to have_content("75% off 6 or More")
       expect(page).to have_content("Discount Amount 0.75")
@@ -50,11 +50,11 @@ RSpec.describe "As a merchant employee" do
 
     it "I cannot set a discount amount to 100 percent or more" do
 
-      visit "/merchant/items/discounts/#{@discount_1.id}"
+      visit "/merchant/discounts/#{@discount_1.id}"
 
       click_link "Update Discount"
 
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}/edit")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
 
       fill_in "Description", with: "75% off 6 or More"
       fill_in "Discount amount", with: "2"
@@ -62,23 +62,23 @@ RSpec.describe "As a merchant employee" do
       click_button "Update Discount"
 
       expect(page).to have_content("Discount amount must be less than 1")
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}/edit")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
 
     end
 
     it "I cannot set a minimum quantity of less than 1" do
 
-      visit "/merchant/items/discounts/#{@discount_1.id}"
+      visit "/merchant/discounts/#{@discount_1.id}"
 
       click_link "Update Discount"
 
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}/edit")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
 
       fill_in "Minimum quantity", with: "0"
       click_button "Update Discount"
 
       expect(page).to have_content("Minimum quantity must be greater than 0")
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_1.id}/edit")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_1.id}/edit")
 
     end
 

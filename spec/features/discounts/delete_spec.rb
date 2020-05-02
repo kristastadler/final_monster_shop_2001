@@ -29,11 +29,11 @@ RSpec.describe "As a merchant employee" do
 
     it "I can delete a discount from it's show page" do
 
-      visit "/merchant/items/discounts/#{@discount_3.id}"
+      visit "/merchant/discounts/#{@discount_3.id}"
 
       click_link "Delete Discount"
 
-      expect(current_path).to eq("/merchant/items/discounts")
+      expect(current_path).to eq("/merchant/discounts")
       expect(page).to have_content "Discount successfully deleted"
 
       within "#item-#{@stud.id}" do

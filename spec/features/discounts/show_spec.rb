@@ -28,13 +28,13 @@ RSpec.describe "As a merchant employee" do
     end
 
     it "discount descriptions are links and clicking one takes me to a show page where I can see the details of the discount" do
-      visit "/merchant/items/discounts"
+      visit "/merchant/discounts"
 
       within "#item-#{@stud.id}" do
         click_link "50% off 10 or More"
       end
 
-      expect(current_path).to eq("/merchant/items/discounts/#{@discount_3.id}")
+      expect(current_path).to eq("/merchant/discounts/#{@discount_3.id}")
 
       expect(page).to have_content(@discount_3.description)
       expect(page).to have_content(@stud.name)

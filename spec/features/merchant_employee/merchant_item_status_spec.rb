@@ -18,9 +18,9 @@ RSpec.describe "As a merchant employee when I visit my items page" do
 
     @tire = @bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
     @stud = @bike_shop.items.create(name: "Canti Studs", description: "You don't need 'em till you do.'", price: 5, image: "https://www.jensonusa.com/globalassets/product-images---all-assets/problem-solvers/br309z00.jpg", active?:false, inventory: 4)
-    
+
   end
-  
+
   describe "I see all of my items with the following info" do
     it "name, description, price, image, status, inventory" do
 

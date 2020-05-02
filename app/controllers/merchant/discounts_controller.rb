@@ -5,7 +5,7 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def show
-    @discount = Discount.find(params[:discount_id])
+    @discount = Discount.find(params[:id])
   end
 
   def new
@@ -18,7 +18,7 @@ class Merchant::DiscountsController < Merchant::BaseController
     discount = item.discounts.new(discount_params)
     if discount.save
       flash[:success] = "New discount added successfully"
-      redirect_to "/merchant/items/discounts/#{discount.id}"
+      redirect_to "/merchant/discounts/#{discount.id}"
     else
       flash[:error] = discount.errors.full_messages.to_sentence
       redirect_back(fallback_location: "/")
@@ -26,14 +26,14 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def edit
-    @discount = Discount.find(params[:discount_id])
+    @discount = Discount.find(params[:id])
   end
 
   def update
-    discount = Discount.find(params[:discount_id])
+    discount = Discount.find(params[:id])
   if discount.update(discount_params)
     flash[:success] = "Discount has been updated!"
-    redirect_to "/merchant/items/discounts/#{discount.id}"
+    redirect_to "/merchant/discounts/#{discount.id}"
   else
     flash[:error] = discount.errors.full_messages.to_sentence
     redirect_back(fallback_location: "/")
@@ -41,11 +41,11 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def destroy
-    discount = Discount.find(params[:discount_id])
+    discount = Discount.find(params[:id])
     discount.destroy
     flash[:success] = "Discount successfully deleted"
 
-    redirect_to "/merchant/items/discounts"
+    redirect_to "/merchant/discounts"
   end
 
 private

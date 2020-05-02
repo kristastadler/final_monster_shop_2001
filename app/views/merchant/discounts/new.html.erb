@@ -1,5 +1,5 @@
 <h1>Create New Discount For <%=link_to @discount.item.name, "/items/#{@discount.item.id}" %></h1>
 
 <p> Please enter discount amounts as a decimal percentage (e.g. .25 for 25%, .50 for 50%, etc.) </p>
-<%= render partial: 'form', locals: {url: "/merchant/items/discounts/#{@discount.item.id}",
+<%= render partial: 'form', locals: {url: "/merchant/items/#{@discount.item.id}/discounts",
                                      method: :post} %>

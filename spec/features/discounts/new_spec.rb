@@ -24,14 +24,14 @@ RSpec.describe "As a merchant employee" do
 
     it "I can create a new discount" do
 
-    visit "/merchant/items/discounts"
+    visit "/merchant/discounts"
 
 
     within "#item-#{@seat.id}" do
       click_link "Add New Discount"
     end
 
-    expect(current_path).to eq("/merchant/items/discounts/#{@seat.id}/new")
+    expect(current_path).to eq("/merchant/items/#{@seat.id}/discounts/new")
 
     fill_in "Description", with: "50% off 2 or More"
     fill_in "Discount amount", with: "0.50"
@@ -40,7 +40,7 @@ RSpec.describe "As a merchant employee" do
 
     discount = Discount.last
 
-    expect(current_path).to eq("/merchant/items/discounts/#{discount.id}")
+    expect(current_path).to eq("/merchant/discounts/#{discount.id}")
     expect(page).to have_content("New discount added successfully")
 
     expect(page).to have_content("50% off 2 or More")
@@ -50,26 +50,26 @@ RSpec.describe "As a merchant employee" do
   end
 
   it "I can't create a new discount with missing fields" do
-    visit "/merchant/items/discounts"
+    visit "/merchant/discounts"
 
     within "#item-#{@tire.id}" do
       click_link "Add New Discount"
     end
 
-    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+    expect(current_path).to eq("/merchant/items/#{@tire.id}/discounts/new")
 
     fill_in "Description", with: "50% off 4 or More"
     fill_in "Minimum quantity", with: "2"
     click_button "Create Discount"
 
-    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+    expect(current_path).to eq("/merchant/items/#{@tire.id}/discounts/new")
     expect(page).to have_content("Discount amount can't be blank")
 
   end
 
   it "I cannot set a discount amount to 100 percent or more" do
 
-    visit "/merchant/items/discounts"
+    visit "/merchant/discounts"
 
     within "#item-#{@tire.id}" do
       click_link "Add New Discount"
@@ -81,13 +81,13 @@ RSpec.describe "As a merchant employee" do
     click_button "Create Discount"
 
     expect(page).to have_content("Discount amount must be less than 1")
-    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+    expect(current_path).to eq("/merchant/items/#{@tire.id}/discounts/new")
 
   end
 
   it "I cannot set a minimum quantity of less than 1" do
 
-    visit "/merchant/items/discounts"
+    visit "/merchant/discounts"
 
     within "#item-#{@tire.id}" do
       click_link "Add New Discount"
@@ -99,7 +99,7 @@ RSpec.describe "As a merchant employee" do
     click_button "Create Discount"
 
     expect(page).to have_content("Minimum quantity must be greater than 0")
-    expect(current_path).to eq("/merchant/items/discounts/#{@tire.id}/new")
+    expect(current_path).to eq("/merchant/items/#{@tire.id}/discounts/new")
 
   end
 end
